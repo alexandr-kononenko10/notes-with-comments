@@ -1,0 +1,33 @@
+package com.scarlettjoubert.noteswithcomments.hilt
+
+import android.content.Context
+import androidx.room.Room
+import com.scarlettjoubert.noteswithcomments.data.NotesRepository
+import com.scarlettjoubert.noteswithcomments.data.dbnotes.NotesRoomDataBase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object HiltModule {
+
+    @Singleton
+    @Provides
+    fun getNoteDataBase(
+        @ApplicationContext app: Context
+    ) = Room.databaseBuilder(
+        app,
+        NotesRoomDataBase::class.java,
+        "notes"
+    ).allowMainThreadQueries()
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideNoteDao(db: NotesRoomDataBase) = db.notesDao()
+
+}

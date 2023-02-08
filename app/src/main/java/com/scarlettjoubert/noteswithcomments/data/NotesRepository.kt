@@ -25,5 +25,7 @@ class NotesRepository @Inject constructor(private val notesDao: NotesDao) {
     fun update(note:Notes){
         notesDao.updateNote(note)
     }
-    //добавить все функции!!!
+    fun delete(id:Int){
+        notesDao.deleteNotes(id)
+    }
 }

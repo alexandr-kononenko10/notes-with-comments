@@ -26,7 +26,6 @@
                 android:layout_margin="12dp"
                 app:cardBackgroundColor="@color/yellow"
                 app:cardCornerRadius="18dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -77,15 +76,37 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/editCommentCardview"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@color/yellow"
+                app:cardCornerRadius="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editNoteCardview">
+
+                <EditText
+                    android:id="@+id/editTextComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="start"
+                    android:hint="@string/edit_comment"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
             <ImageButton
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:id="@+id/imageButtonAddComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_add_comment_24"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editCommentCardview"
                 app:layout_constraintTop_toBottomOf="@id/editNoteCardview"
                 />
 
@@ -93,10 +114,23 @@
                 android:id="@+id/commeentsRecycleView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/imageButtonAddComment"
+                android:layout_marginTop="15dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/textViewCommentsTitle" />
+
+            <TextView
+                android:id="@+id/textViewCommentsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/comments"
+                android:textSize = "24sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/yellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editCommentCardview" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,6 @@ interface NotesDao {
     @Query("DELETE FROM notes")
     suspend fun deleteAll()
 
-    @Delete
-    fun deleteNotes(vararg note: Notes)
+    @Query("DELETE FROM notes WHERE id = :id")
+    fun deleteNotes(id:Int)
 }

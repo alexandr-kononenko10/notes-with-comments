@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,9 +33,10 @@ class NotesFragment : Fragment() {
     ): View {
         _binding = FragmentNotesBinding.inflate(inflater)
 
-        adapter = NotesAdapter { note ->
-            onClick(note)
-        }
+        adapter = NotesAdapter (
+            { note -> onClick(note) },
+            { note -> delete(note) },
+            viewModel.commentsRepository)
         binding.notesRecyclerview.adapter = adapter
         binding.notesRecyclerview.addItemDecoration(
             ItemDecorator(resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin))
@@ -65,7 +67,9 @@ class NotesFragment : Fragment() {
         bundle.putInt(ID, note.id!!)
         bundle.putLong(CREATED, note.created)
         findNavController().navigate(R.id.action_navigation_notes_to_editNoteFragment, bundle)
-
     }
 
+    private fun delete(note:Notes){
+        viewModel.delete(note.id!!)
+    }
 }

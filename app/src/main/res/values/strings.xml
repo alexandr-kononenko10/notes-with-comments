@@ -5,4 +5,6 @@
     <string name="plus">+</string>
     <string name="topic">Topic</string>
     <string name="edit_text">Enter text</string>
+    <string name="edit_comment">Enter comment</string>
+    <string name="comments">Comments:</string>
 </resources>

@@ -3,13 +3,18 @@ package com.scarlettjoubert.noteswithcomments.ui.notes
 import androidx.lifecycle.ViewModel
 import com.scarlettjoubert.noteswithcomments.data.NotesRepository
 import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
+import com.scarlettjoubert.noteswithcomments.data.model.CommentsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class NotesViewModel @Inject constructor(private val repository:NotesRepository) : ViewModel() {
+class NotesViewModel @Inject constructor(private val repository:NotesRepository, val commentsRepository: CommentsRepository) : ViewModel() {
 
     val noteFlow = repository.notes
+
+    fun delete(id:Int){
+        repository.delete(id)
+    }
 
    suspend fun test(){
        val testNote = Notes(null, text = "test text",
@@ -18,5 +23,6 @@ class NotesViewModel @Inject constructor(private val repository:NotesRepository)
 
        repository.insert(testNote)
    }
+
 
 }

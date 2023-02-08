@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scarlettjoubert.noteswithcomments.*
 import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
 import com.scarlettjoubert.noteswithcomments.databinding.FragmentNotesBinding
@@ -35,6 +36,10 @@ class NotesFragment : Fragment() {
             onClick(note)
         }
         binding.notesRecyclerview.adapter = adapter
+        binding.notesRecyclerview.addItemDecoration(
+            ItemDecorator(resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin))
+        )
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.noteFlow.collect { notes ->
                 adapter.submitList(notes)

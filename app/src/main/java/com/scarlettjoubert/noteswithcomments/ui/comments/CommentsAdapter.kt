@@ -1,16 +1,18 @@
 package com.scarlettjoubert.noteswithcomments.ui.comments
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.scarlettjoubert.noteswithcomments.DATEFORMAT
 import com.scarlettjoubert.noteswithcomments.data.dbcomments.Comments
-import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
-import com.scarlettjoubert.noteswithcomments.data.model.Note
 import com.scarlettjoubert.noteswithcomments.databinding.NoteItemBinding
 import com.scarlettjoubert.noteswithcomments.ui.notes.NoteViewHolder
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CommentsAdapter(
     private val onClick: (Comments) -> Unit,
@@ -22,17 +24,20 @@ class CommentsAdapter(
         return NoteViewHolder(binding)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val item = getItem(position)
+        val longTime = item?.created!!
+        val date = Date(longTime)
+        val format = SimpleDateFormat(DATEFORMAT)
 
         with(holder.binding){
             textViewNoteTopic.isVisible = false
             imageViewCommentsCounter.isVisible = false
             textViewCommentsCounter.isVisible = false
             textViewNote.text = item.text
-            textViewNoteCreated.text = item.created.toString()
+            textViewNoteCreated.text = format.format(date)
             cardViewItem.setOnClickListener{
-                Log.i("click", "click")
               item?.let { onClick(item) }
             }
             imageViewDeleteNote.setOnClickListener {

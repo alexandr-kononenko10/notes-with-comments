@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Заметки с комментариями</string>
+    <string name="title_notes">Заметки</string>
+    <string name="title_topics">Темы заметок</string>
+    <string name="plus">+</string>
+    <string name="topic">Тема</string>
+    <string name="edit_text">Введите текст</string>
+    <string name="edit_comment">введите комментарий</string>
+    <string name="comments">Комментарии:</string>
+    <string name="empty_entry">Пустая запись не была сохранена</string>
+    <string name="saved">Сохранено</string>
+    <string name="search">Поиск</string>
+    <string name="share_topic">Тема: </string>
+    <string name="share_comments">Комментарии: </string>
+    <string name="separator">----------</string>
+    <string name="title_edit_note">Редактирование</string>
+    <string name="title_new_note">Новая заметка</string>
+    <string name="title_notes_from_topic">Заметки из темы</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+</resources>

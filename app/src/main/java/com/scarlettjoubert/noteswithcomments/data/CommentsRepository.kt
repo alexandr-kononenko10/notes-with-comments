@@ -1,4 +1,4 @@
-package com.scarlettjoubert.noteswithcomments.data.model
+package com.scarlettjoubert.noteswithcomments.data
 
 import androidx.annotation.WorkerThread
 import com.scarlettjoubert.noteswithcomments.data.dbcomments.Comments
@@ -11,8 +11,9 @@ class CommentsRepository @Inject constructor(private val commentsDao: CommentsDa
     fun getComments(id: Int): Flow<List<Comments>> {
        return commentsDao.getAllComments(id)
     }
-    fun getCommentsCount(id: Int): Int {
-        return commentsDao.getAllCommentsList(id).size
+
+    fun getCommentsList(id: Int): List<Comments> {
+        return commentsDao.getAllCommentsList(id)
     }
 
     @Suppress("RedundantSuspendModifier")

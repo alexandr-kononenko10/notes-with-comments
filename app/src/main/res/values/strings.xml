@@ -7,4 +7,17 @@
     <string name="edit_text">Enter text</string>
     <string name="edit_comment">Enter comment</string>
     <string name="comments">Comments:</string>
+    <string name="empty_entry">Empty entry was not saved</string>
+    <string name="saved">Saved</string>
+    <string name="search">Search</string>
+    <string name="share_topic">Topic: </string>
+    <string name="share_comments">Comments: </string>
+    <string name="separator">----------</string>
+    <string name="title_edit_note">Edit note</string>
+    <string name="title_new_note">New note</string>
+    <string name="title_notes_from_topic">Topic Notes</string>
+    <string name="title_search">Search</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

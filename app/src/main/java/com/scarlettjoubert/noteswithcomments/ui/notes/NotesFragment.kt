@@ -1,9 +1,9 @@
 package com.scarlettjoubert.noteswithcomments.ui.notes
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
@@ -25,6 +25,24 @@ class NotesFragment : Fragment() {
     private val viewModel: NotesViewModel by viewModels()
     private lateinit var adapter: NotesAdapter
     private val bundle = Bundle()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_notes_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> {
+                findNavController().navigate(R.id.action_navigation_notes_to_searchNoteFragment)
+            }
+        }
+        return true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +67,7 @@ class NotesFragment : Fragment() {
         }
 
         binding.buttonAddNote.setOnClickListener {
-            lifecycleScope.launch { viewModel.test() }
+            findNavController().navigate(R.id.action_navigation_notes_to_newNoteFragment)
         }
 
 

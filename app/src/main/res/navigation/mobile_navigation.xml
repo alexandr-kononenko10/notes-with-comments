@@ -14,16 +14,75 @@
         <action
             android:id="@+id/action_navigation_notes_to_editNoteFragment"
             app:destination="@id/editNoteFragment" />
+        <action
+            android:id="@+id/action_navigation_notes_to_newNoteFragment"
+            app:destination="@id/newNoteFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_enter_anim"
+            app:popExitAnim="@animator/nav_default_exit_anim"/>
+        <action
+            android:id="@+id/action_navigation_notes_to_searchNoteFragment"
+            app:destination="@id/searchNoteFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_enter_anim"
+            app:popExitAnim="@animator/nav_default_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_topics"
         android:name="com.scarlettjoubert.noteswithcomments.ui.topics.TopicsFragment"
         android:label="@string/title_topics"
         tools:layout="@layout/fragment_topics" >
+        <action
+            android:id="@+id/action_navigation_topics_to_notesFromTopicFragment"
+            app:destination="@id/notesFromTopicFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_enter_anim"
+            app:popExitAnim="@animator/nav_default_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/editNoteFragment"
         android:name="com.scarlettjoubert.noteswithcomments.ui.editnote.EditNoteFragment"
-        android:label="fragment_edit_note"
+        android:label="@string/title_edit_note"
         tools:layout="@layout/fragment_edit_note" />
+    <fragment
+        android:id="@+id/newNoteFragment"
+        android:name="com.scarlettjoubert.noteswithcomments.ui.newnote.NewNoteFragment"
+        android:label="@string/title_new_note"
+        tools:layout="@layout/fragment_new_note" />
+    <fragment
+        android:id="@+id/notesFromTopicFragment"
+        android:name="com.scarlettjoubert.noteswithcomments.ui.notesfromtopic.NotesFromTopicFragment"
+        android:label="@string/title_notes_from_topic"
+        tools:layout="@layout/fragment_notes_from_topic" >
+        <action
+            android:id="@+id/action_notesFromTopicFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_enter_anim"
+            app:popExitAnim="@animator/nav_default_exit_anim"/>
+        <action
+            android:id="@+id/action_notesFromTopicFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_enter_anim"
+            app:popExitAnim="@animator/nav_default_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchNoteFragment"
+        android:name="com.scarlettjoubert.noteswithcomments.ui.searchnote.SearchNoteFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search_note" >
+        <action
+            android:id="@+id/action_searchNoteFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_enter_anim"
+            app:popExitAnim="@animator/nav_default_exit_anim"/>
+    </fragment>
 </navigation>

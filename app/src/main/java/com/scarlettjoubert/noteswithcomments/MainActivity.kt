@@ -1,6 +1,11 @@
 package com.scarlettjoubert.noteswithcomments
 
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -15,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,5 +37,24 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.editNoteFragment || destination.id == R.id.newNoteFragment ) {
+
+               navView.visibility = View.GONE
+            } else {
+                navView.visibility = View.VISIBLE
+            }
+            if (destination.id == R.id.newNoteFragment){
+                this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressedDispatcher.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

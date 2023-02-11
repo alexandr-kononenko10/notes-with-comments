@@ -5,13 +5,12 @@ import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scarlettjoubert.noteswithcomments.*
 import com.scarlettjoubert.noteswithcomments.data.dbcomments.Comments
@@ -28,10 +27,29 @@ class EditNoteFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: EditNoteViewModel by viewModels()
     private lateinit var adapter: CommentsAdapter
+    private var id: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    //    requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).isVisible = false
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.edit_note_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.share_button_toolbar -> {
+                viewModel.shareNote(
+                    id!!,
+                    requireContext(),
+                    binding.editTextNotesTopic.text.toString(),
+                    binding.editTextNote.text.toString()
+                )
+            }
+        }
+        return true
     }
 
     override fun onCreateView(
@@ -39,7 +57,7 @@ class EditNoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditNoteBinding.inflate(inflater)
-        val id = arguments?.getInt(ID)
+        id = arguments?.getInt(ID)!!
         Log.i("id", id.toString())
         val topic = arguments?.getString(TOPIC)
         val text = arguments?.getString(TEXT)
@@ -59,9 +77,8 @@ class EditNoteFragment : Fragment() {
 
         if (id !== null) {
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                val commentsFlow = viewModel.getComments(id)
+                val commentsFlow = viewModel.getComments(id!!)
                 commentsFlow.collect { comments ->
-                    Log.i("comments", comments.toString())
                     adapter.submitList(comments)
                 }
             }
@@ -94,8 +111,6 @@ class EditNoteFragment : Fragment() {
         val text = binding.editTextNote.text
         val created = arguments?.getLong(CREATED)
         viewModel.update(id!!, topic.toString(), text.toString(), created!!)
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).visibility =
-            ViewGroup.VISIBLE
     }
 
     private fun deleteComment(item: Comments) {
@@ -106,6 +121,6 @@ class EditNoteFragment : Fragment() {
 
     }
 
-    fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
+    private fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 }

@@ -1,13 +1,14 @@
 package com.scarlettjoubert.noteswithcomments.ui.comments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.scarlettjoubert.noteswithcomments.DATEFORMAT
+import com.scarlettjoubert.noteswithcomments.R
 import com.scarlettjoubert.noteswithcomments.data.dbcomments.Comments
 import com.scarlettjoubert.noteswithcomments.databinding.NoteItemBinding
 import com.scarlettjoubert.noteswithcomments.ui.notes.NoteViewHolder
@@ -16,7 +17,8 @@ import java.util.*
 
 class CommentsAdapter(
     private val onClick: (Comments) -> Unit,
-    private val deleteComment: (Comments) -> Unit
+    private val deleteComment: (Comments) -> Unit,
+    private val context: Context,
 ): ListAdapter<Comments, NoteViewHolder>(DiffUtilItemCallbackNotes()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
@@ -29,7 +31,7 @@ class CommentsAdapter(
         val item = getItem(position)
         val longTime = item?.created!!
         val date = Date(longTime)
-        val format = SimpleDateFormat(DATEFORMAT)
+        val format = SimpleDateFormat(context.getString(R.string.date_format))
 
         with(holder.binding){
             textViewNoteTopic.isVisible = false

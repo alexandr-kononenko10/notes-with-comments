@@ -1,5 +1,6 @@
 package com.scarlettjoubert.noteswithcomments.ui.topics
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.scarlettjoubert.noteswithcomments.databinding.TopicItemBinding
 
 class TopicsAdapter(
     private val onClick: (String) -> Unit,
-    val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
 ) : ListAdapter<String, TopicsViewHolder>(DiffUtilItemCallbackTopics()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicsViewHolder {
@@ -21,7 +22,7 @@ class TopicsAdapter(
     override fun onBindViewHolder(holder: TopicsViewHolder, position: Int) {
         val item = getItem(position)
         val counter = notesRepository.getNotesFromTopic(item)
-Log.i("counter", counter.toString())
+        Log.i("counter", counter.toString())
         with(holder.binding) {
             textViewTopicItem.text = item
             textViewTopicsCounter.text = counter.size.toString()
@@ -32,7 +33,8 @@ Log.i("counter", counter.toString())
 
     }
 }
-class DiffUtilItemCallbackTopics: DiffUtil.ItemCallback<String>() {
+
+class DiffUtilItemCallbackTopics : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean =
         oldItem == newItem
 

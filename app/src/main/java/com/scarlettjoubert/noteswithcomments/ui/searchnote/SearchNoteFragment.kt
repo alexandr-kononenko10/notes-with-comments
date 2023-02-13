@@ -41,7 +41,8 @@ class SearchNoteFragment : Fragment() {
         adapter = NotesAdapter(
             { note -> onClick(note) },
             { note -> delete(note) },
-            viewModel.commentsRepository
+            viewModel.commentsRepository,
+            requireContext()
         )
         binding.recycleViewSearch.adapter = adapter
         binding.recycleViewSearch.addItemDecoration(

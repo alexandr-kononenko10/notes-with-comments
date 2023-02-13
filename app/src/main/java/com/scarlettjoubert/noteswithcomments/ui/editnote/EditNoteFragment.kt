@@ -71,8 +71,11 @@ class EditNoteFragment : Fragment() {
             ItemDecorator(resources.getDimensionPixelSize(R.dimen.custom_vertical_margin))
         )
 
-        adapter = CommentsAdapter({ item -> onClick(item) },
-            { item -> deleteComment(item) })
+        adapter = CommentsAdapter(
+            { item -> onClick(item) },
+            { item -> deleteComment(item) },
+            requireContext()
+        )
         binding.commeentsRecycleView.adapter = adapter
 
         if (id !== null) {

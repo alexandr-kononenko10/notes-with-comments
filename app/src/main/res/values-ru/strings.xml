@@ -19,5 +19,5 @@
     <string name="title_notes_from_topic">Заметки из темы</string>
     <string name="title_search">Поиск</string>
     <string name="title_activity_splash">SplashActivity</string>
-
+    <string name="date_format">"dd.MM.yyyy"</string>
 </resources>

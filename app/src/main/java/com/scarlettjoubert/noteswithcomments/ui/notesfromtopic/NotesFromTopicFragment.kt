@@ -38,7 +38,8 @@ class NotesFromTopicFragment : Fragment() {
         adapter = NotesAdapter (
             { note -> onClick(note) },
             { note -> delete(note) },
-            viewModel.commentsRepository)
+            viewModel.commentsRepository,
+            requireContext())
         binding.notesFromTopicRecyclerview.adapter = adapter
         binding.notesFromTopicRecyclerview.addItemDecoration(
             ItemDecorator(resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin))

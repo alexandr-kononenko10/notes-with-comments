@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "785308398862",
+    "project_id": "notes-wuth-comments",
+    "storage_bucket": "notes-wuth-comments.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785308398862:android:c5fadd5b280d4ef60a135f",
+        "android_client_info": {
+          "package_name": "com.scarlettjoubert.noteswithcomments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785308398862-9n0ab58lq9ftolup4gmorthrse5ig8v7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKApB0MZ-36-P8e_z2j2-mk_PNXzhLRvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785308398862-9n0ab58lq9ftolup4gmorthrse5ig8v7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

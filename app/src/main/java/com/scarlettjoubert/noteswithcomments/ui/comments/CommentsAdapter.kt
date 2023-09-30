@@ -2,24 +2,23 @@ package com.scarlettjoubert.noteswithcomments.ui.comments
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.scarlettjoubert.noteswithcomments.R
-import com.scarlettjoubert.noteswithcomments.data.dbcomments.Comments
+import com.scarlettjoubert.noteswithcomments.data.dbcomments.CommentsDto
 import com.scarlettjoubert.noteswithcomments.databinding.NoteItemBinding
 import com.scarlettjoubert.noteswithcomments.ui.notes.NoteViewHolder
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CommentsAdapter(
-    private val onClick: (Comments) -> Unit,
-    private val deleteComment: (Comments) -> Unit,
+    private val onClick: (CommentsDto) -> Unit,
+    private val deleteComment: (CommentsDto) -> Unit,
     private val context: Context,
-): ListAdapter<Comments, NoteViewHolder>(DiffUtilItemCallbackNotes()) {
+): ListAdapter<CommentsDto, NoteViewHolder>(DiffUtilItemCallbackNotes()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val binding = NoteItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -49,11 +48,11 @@ class CommentsAdapter(
     }
 }
 
-class DiffUtilItemCallbackNotes : DiffUtil.ItemCallback<Comments>() {
-    override fun areItemsTheSame(oldItem: Comments, newItem: Comments): Boolean =
+class DiffUtilItemCallbackNotes : DiffUtil.ItemCallback<CommentsDto>() {
+    override fun areItemsTheSame(oldItem: CommentsDto, newItem: CommentsDto): Boolean =
         oldItem.id == newItem.id
 
 
-    override fun areContentsTheSame(oldItem: Comments, newItem: Comments): Boolean =
+    override fun areContentsTheSame(oldItem: CommentsDto, newItem: CommentsDto): Boolean =
         oldItem == newItem
 }

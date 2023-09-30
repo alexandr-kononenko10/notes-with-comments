@@ -5,6 +5,7 @@
     <string name="plus">+</string>
     <string name="topic">Topic</string>
     <string name="edit_text">Enter text</string>
+    <string name="edit_topic">Enter topic</string>
     <string name="edit_comment">Enter comment</string>
     <string name="comments">Comments:</string>
     <string name="empty_entry">Empty entry was not saved</string>
@@ -14,11 +15,22 @@
     <string name="share_comments">Comments: </string>
     <string name="separator">----------</string>
     <string name="title_edit_note">Edit note</string>
+    <string name="title_edit_comment">Edit comment</string>
     <string name="title_new_note">New note</string>
-    <string name="title_notes_from_topic">Topic Notes</string>
+    <string name="title_notes_from_topic">Notes from topic </string>
     <string name="title_search">Search</string>
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="date_format">"MM.dd.yyyy"</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="last_comment_header">Comments: </string>
+    <string name="add_comment">Add comment</string>
+    <string name="show_all_comments">Show all comments</string>
+    <string name="no_comments">No comments</string>
+    <string name="last_comment">Last comment:</string>
+    <string name="searchline_placeholder">Search for a note</string>
+    <string name="no_results">No results</string>
+    <string name="initial_search_text">Search results will be here</string>
+    <string name="deleted_snakbar">Deleted!</string>
+    <string name="deleted_snakbar_action">Cancel</string>
+    <string name="no_topic_title">**** no topic ***</string>
 </resources>

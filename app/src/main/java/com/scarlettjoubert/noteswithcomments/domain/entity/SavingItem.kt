@@ -1,0 +1,3 @@
+package com.scarlettjoubert.noteswithcomments.domain.entity
+
+interface SavingItem

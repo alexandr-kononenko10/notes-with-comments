@@ -1,13 +1,13 @@
-package com.scarlettjoubert.noteswithcomments.data.dbnotes
+package com.scarlettjoubert.noteswithcomments.data.dbcomments
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "notes")
-data class Notes(
+@Entity(tableName = "comments")
+data class CommentsDto(
     @PrimaryKey(autoGenerate = true) val id: Int?,
+    @ColumnInfo(name = "toNote") val toNote: Int,
     @ColumnInfo(name = "text") val text: String,
-    @ColumnInfo(name = "topic") val topic: String,
     @ColumnInfo(name = "created") val created: Long,
 )

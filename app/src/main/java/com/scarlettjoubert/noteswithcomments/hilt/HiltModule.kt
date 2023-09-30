@@ -2,9 +2,12 @@ package com.scarlettjoubert.noteswithcomments.hilt
 
 import android.content.Context
 import androidx.room.Room
+import com.scarlettjoubert.noteswithcomments.data.CommentsRepositoryImpl
 import com.scarlettjoubert.noteswithcomments.data.NotesRepository
 import com.scarlettjoubert.noteswithcomments.data.dbcomments.CommentsRoomDataBase
 import com.scarlettjoubert.noteswithcomments.data.dbnotes.NotesRoomDataBase
+import com.scarlettjoubert.noteswithcomments.domain.repository.CommentRepository
+import com.scarlettjoubert.noteswithcomments.domain.repository.NotesRepositoryInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +22,7 @@ object HiltModule {
     @Singleton
     @Provides
     fun getNoteDataBase(
-        @ApplicationContext app: Context
+        @ApplicationContext app: Context,
     ) = Room.databaseBuilder(
         app,
         NotesRoomDataBase::class.java,
@@ -34,7 +37,7 @@ object HiltModule {
     @Singleton
     @Provides
     fun getCommentsDataBase(
-        @ApplicationContext app: Context
+        @ApplicationContext app: Context,
     ) = Room.databaseBuilder(
         app,
         CommentsRoomDataBase::class.java,
@@ -46,4 +49,13 @@ object HiltModule {
     @Provides
     fun provideCommentsDao(db: CommentsRoomDataBase) = db.commentsDao()
 
+    @Singleton
+    @Provides
+    fun provideRepository(repositoryData: NotesRepository): NotesRepositoryInterface =
+        repositoryData
+
+    @Singleton
+    @Provides
+    fun provideCommentRepository(repositoryData: CommentsRepositoryImpl): CommentRepository =
+        repositoryData
 }

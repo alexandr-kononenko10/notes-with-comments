@@ -1,13 +1,12 @@
 package com.scarlettjoubert.noteswithcomments.ui.searchnote
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,7 +14,7 @@ import com.scarlettjoubert.noteswithcomments.ID
 import com.scarlettjoubert.noteswithcomments.R
 import com.scarlettjoubert.noteswithcomments.TEXT
 import com.scarlettjoubert.noteswithcomments.TOPIC
-import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
+import com.scarlettjoubert.noteswithcomments.data.dbnotes.NotesDto
 import com.scarlettjoubert.noteswithcomments.databinding.FragmentSearchNoteBinding
 import com.scarlettjoubert.noteswithcomments.ui.notes.ItemDecorator
 import com.scarlettjoubert.noteswithcomments.ui.notes.NotesAdapter
@@ -41,7 +40,7 @@ class SearchNoteFragment : Fragment() {
         adapter = NotesAdapter(
             { note -> onClick(note) },
             { note -> delete(note) },
-            viewModel.commentsRepository,
+            viewModel.commentsRepositoryImpl,
             requireContext()
         )
         binding.recycleViewSearch.adapter = adapter
@@ -79,7 +78,7 @@ class SearchNoteFragment : Fragment() {
         _binding = null
     }
 
-    private fun onClick(note: Notes) {
+    private fun onClick(note: NotesDto) {
         bundle.putString(TOPIC, note.topic)
         bundle.putString(TEXT, note.text)
         bundle.putInt(ID, note.id!!)
@@ -87,7 +86,7 @@ class SearchNoteFragment : Fragment() {
         findNavController().navigate(R.id.action_searchNoteFragment_to_editNoteFragment, bundle)
     }
 
-    private fun delete(note: Notes) {
+    private fun delete(note: NotesDto) {
         viewModel.delete(note.id!!)
     }
 

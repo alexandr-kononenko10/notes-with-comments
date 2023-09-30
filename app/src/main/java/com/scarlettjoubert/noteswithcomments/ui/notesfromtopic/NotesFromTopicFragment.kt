@@ -1,21 +1,22 @@
 package com.scarlettjoubert.noteswithcomments.ui.notesfromtopic
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.scarlettjoubert.noteswithcomments.*
-import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
-import com.scarlettjoubert.noteswithcomments.databinding.FragmentNotesBinding
+import com.scarlettjoubert.noteswithcomments.ADD_TO_TOPIC
+import com.scarlettjoubert.noteswithcomments.ID
+import com.scarlettjoubert.noteswithcomments.R
+import com.scarlettjoubert.noteswithcomments.TEXT
+import com.scarlettjoubert.noteswithcomments.TOPIC
+import com.scarlettjoubert.noteswithcomments.data.dbnotes.NotesDto
 import com.scarlettjoubert.noteswithcomments.databinding.FragmentNotesFromTopicBinding
 import com.scarlettjoubert.noteswithcomments.ui.notes.ItemDecorator
 import com.scarlettjoubert.noteswithcomments.ui.notes.NotesAdapter
-import com.scarlettjoubert.noteswithcomments.ui.notes.NotesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,7 +39,7 @@ class NotesFromTopicFragment : Fragment() {
         adapter = NotesAdapter (
             { note -> onClick(note) },
             { note -> delete(note) },
-            viewModel.commentsRepository,
+            viewModel.commentsRepositoryImpl,
             requireContext())
         binding.notesFromTopicRecyclerview.adapter = adapter
         binding.notesFromTopicRecyclerview.addItemDecoration(
@@ -65,7 +66,7 @@ class NotesFromTopicFragment : Fragment() {
         _binding = null
     }
 
-    private fun onClick(note: Notes) {
+    private fun onClick(note: NotesDto) {
         bundle.putString(TOPIC, note.topic)
         bundle.putString(TEXT, note.text)
         bundle.putInt(ID, note.id!!)
@@ -73,7 +74,7 @@ class NotesFromTopicFragment : Fragment() {
         findNavController().navigate(R.id.action_notesFromTopicFragment_to_editNoteFragment, bundle)
     }
 
-    private fun delete(note: Notes){
+    private fun delete(note: NotesDto){
         viewModel.delete(note.id!!)
     }
 }

@@ -1,19 +1,15 @@
 package com.scarlettjoubert.noteswithcomments.ui.editnote
 
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scarlettjoubert.noteswithcomments.*
-import com.scarlettjoubert.noteswithcomments.data.dbcomments.Comments
+import com.scarlettjoubert.noteswithcomments.data.dbcomments.CommentsDto
 import com.scarlettjoubert.noteswithcomments.databinding.FragmentEditNoteBinding
 import com.scarlettjoubert.noteswithcomments.ui.comments.CommentsAdapter
 import com.scarlettjoubert.noteswithcomments.ui.notes.ItemDecorator
@@ -116,11 +112,11 @@ class EditNoteFragment : Fragment() {
         viewModel.update(id!!, topic.toString(), text.toString(), created!!)
     }
 
-    private fun deleteComment(item: Comments) {
+    private fun deleteComment(item: CommentsDto) {
         viewModel.deleteComment(item.id!!)
     }
 
-    private fun onClick(item: Comments) {
+    private fun onClick(item: CommentsDto) {
 
     }
 

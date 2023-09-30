@@ -36,4 +36,13 @@
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGoCompose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to compose"
+        app:layout_constraintBottom_toBottomOf="@+id/notes_recyclerview"
+        app:layout_constraintEnd_toStartOf="@+id/button_add_note"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

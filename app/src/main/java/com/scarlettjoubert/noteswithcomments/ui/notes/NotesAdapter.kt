@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.scarlettjoubert.noteswithcomments.R
-import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
-import com.scarlettjoubert.noteswithcomments.data.CommentsRepository
+import com.scarlettjoubert.noteswithcomments.data.CommentsRepositoryImpl
+import com.scarlettjoubert.noteswithcomments.data.dbnotes.NotesDto
 import com.scarlettjoubert.noteswithcomments.databinding.NoteItemBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NotesAdapter (
-    private val onClick: (Notes) -> Unit,
-    private val delete: (Notes) -> Unit,
-    private val commentsRepository: CommentsRepository,
+    private val onClick: (NotesDto) -> Unit,
+    private val delete: (NotesDto) -> Unit,
+    private val commentsRepositoryImpl: CommentsRepositoryImpl,
     private val context: Context,
-): ListAdapter<Notes, NoteViewHolder>(DiffUtilItemCallbackNotes()) {
+): ListAdapter<NotesDto, NoteViewHolder>(DiffUtilItemCallbackNotes()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val binding = NoteItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -36,7 +36,7 @@ class NotesAdapter (
             textViewNoteTopic.text = item.topic
             textViewNote.text = item.text
             textViewNoteCreated.text = format.format(date)
-            textViewCommentsCounter.text = commentsRepository.getCommentsList(item.id!!).size.toString()
+            textViewCommentsCounter.text = commentsRepositoryImpl.getCommentsList(item.id!!).size.toString()
             cardViewItem.setOnClickListener{
               item?.let { onClick(item) }
             }
@@ -47,11 +47,11 @@ class NotesAdapter (
     }
 }
 
-class DiffUtilItemCallbackNotes : DiffUtil.ItemCallback<Notes>() {
-    override fun areItemsTheSame(oldItem: Notes, newItem: Notes): Boolean =
+class DiffUtilItemCallbackNotes : DiffUtil.ItemCallback<NotesDto>() {
+    override fun areItemsTheSame(oldItem: NotesDto, newItem: NotesDto): Boolean =
         oldItem.id == newItem.id
 
 
-    override fun areContentsTheSame(oldItem: Notes, newItem: Notes): Boolean =
+    override fun areContentsTheSame(oldItem: NotesDto, newItem: NotesDto): Boolean =
         oldItem == newItem
 }

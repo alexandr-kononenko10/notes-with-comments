@@ -1,22 +1,21 @@
 package com.scarlettjoubert.noteswithcomments.ui.notes
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.view.MenuProvider
-import androidx.core.view.isVisible
-import androidx.core.view.marginBottom
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scarlettjoubert.noteswithcomments.*
-import com.scarlettjoubert.noteswithcomments.data.dbnotes.Notes
+import com.scarlettjoubert.noteswithcomments.cimpose.presentation.MainActivity2
+import com.scarlettjoubert.noteswithcomments.data.dbnotes.NotesDto
 import com.scarlettjoubert.noteswithcomments.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
+@ExperimentalAnimationApi
 @AndroidEntryPoint
 class NotesFragment : Fragment() {
 
@@ -29,12 +28,16 @@ class NotesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_notes_menu, menu)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_search -> {
@@ -44,6 +47,7 @@ class NotesFragment : Fragment() {
         return true
     }
 
+    @ExperimentalMaterial3Api
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,7 +58,7 @@ class NotesFragment : Fragment() {
         adapter = NotesAdapter (
             { note -> onClick(note) },
             { note -> delete(note) },
-            viewModel.commentsRepository,
+            viewModel.commentsRepositoryImpl,
             requireContext())
         binding.notesRecyclerview.adapter = adapter
         binding.notesRecyclerview.addItemDecoration(
@@ -71,7 +75,11 @@ class NotesFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_notes_to_newNoteFragment)
         }
 
-
+        binding.buttonGoCompose.setOnClickListener{
+            startActivity(
+                Intent(requireContext(), MainActivity2::class.java)
+            )
+        }
         return binding.root
     }
 
@@ -80,7 +88,7 @@ class NotesFragment : Fragment() {
         _binding = null
     }
 
-    private fun onClick(note: Notes) {
+    private fun onClick(note: NotesDto) {
         bundle.putString(TOPIC, note.topic)
         bundle.putString(TEXT, note.text)
         bundle.putInt(ID, note.id!!)
@@ -88,7 +96,7 @@ class NotesFragment : Fragment() {
         findNavController().navigate(R.id.action_navigation_notes_to_editNoteFragment, bundle)
     }
 
-    private fun delete(note:Notes){
+    private fun delete(note:NotesDto){
         viewModel.delete(note.id!!)
     }
 }
